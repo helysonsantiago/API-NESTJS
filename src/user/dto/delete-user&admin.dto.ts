@@ -1,11 +1,10 @@
-import { IsString, IsNotEmpty, IsBoolean } from 'class-validator';
+import { IsNotEmpty, IsBoolean, IsNumber } from 'class-validator';
 export class DeleteAdminDto {
-
   @IsNotEmpty()
   @IsBoolean()
   active: boolean;
 
   @IsNotEmpty()
-  @IsString()
-  role: string;
+  @IsNumber()
+  role: number;
 }

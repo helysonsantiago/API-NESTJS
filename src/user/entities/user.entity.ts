@@ -13,9 +13,10 @@ import {
 export class User {
   @PrimaryGeneratedColumn()
   id: number;
+
   @Exclude({ toPlainOnly: true })
-  @Column({ default: 'user' })
-  role: string;
+  @Column({ default: 1 })
+  role: number;
 
   @Column({ default: true })
   active: boolean;

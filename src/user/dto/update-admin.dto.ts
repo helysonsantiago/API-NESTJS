@@ -1,4 +1,4 @@
-import { IsString, IsOptional, IsNotEmpty } from 'class-validator';
+import { IsString, IsOptional, IsNotEmpty, IsNumber } from 'class-validator';
 export class UpdateAdminDto {
   @IsString({ message: 'Insira um nome válido.' })
   @IsNotEmpty({ message: 'Insira um nome.' })
@@ -11,6 +11,6 @@ export class UpdateAdminDto {
   password?: string;
 
   @IsNotEmpty()
-  @IsString()
-  role: string;
+  @IsNumber()
+  role?: number;
 }

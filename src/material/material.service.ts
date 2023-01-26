@@ -1,23 +1,24 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { CreateTaskDto } from './dto/create-task.dto';
-import { UpdateTaskDto } from './dto/update-task.dto';
-import { Task } from './entities/task.entity';
+import { CreateMaterialDto } from './dto/create-material.dto';
+import { UpdateMaterialDto } from './dto/update-material.dto';
+import { Material } from './entities/material.entity';
 
 @Injectable()
-export class TasksService {
+export class MaterialService {
   constructor(
-    @InjectRepository(Task)
-    private taskRepository: Repository<Task>,
+    @InjectRepository(Material)
+    private materialRepository: Repository<Material>,
   ) {}
 
-  async create(createTaskDto: CreateTaskDto): Promise<Task> {
+  //CREATE A MATERIAL
+  async create(createMaterialDto: CreateMaterialDto): Promise<Material> {
     try {
-      const newTask = await this.taskRepository.save({
-        company: createTaskDto.company,
-        description: createTaskDto.description,
-        ownerId: createTaskDto.ownerId,
+      const newTask = await this.materialRepository.save({
+        company: createMaterialDto.company,
+        materials: createMaterialDto.materials,
+        ownerId: createMaterialDto.ownerId,
       });
 
       return newTask;
@@ -35,11 +36,11 @@ export class TasksService {
     }
   }
 
-  //GET ALL TASKS
-  async findAll(): Promise<Task[]> {
+  //GET ALL MATERIALS
+  async findAll(): Promise<Material[]> {
     try {
-      const tasks = await this.taskRepository.find();
-      return tasks;
+      const materials = await this.materialRepository.find();
+      return materials;
     } catch (error) {
       throw new HttpException(
         {
@@ -55,11 +56,11 @@ export class TasksService {
     }
   }
 
-  //GET A TASK
-  async findOne(id: number): Promise<Task> {
+  //GET A MATERIAL
+  async findOne(id: number): Promise<Material> {
     try {
-      const aTask = await this.taskRepository.findOneBy({ id });
-      return aTask;
+      const aMaterial = await this.materialRepository.findOneBy({ id });
+      return aMaterial;
     } catch (error) {
       throw new HttpException(
         {
@@ -74,15 +75,15 @@ export class TasksService {
     }
   }
 
-  //UPDATED A TASK
-  async update(id: string, updateTaskDto: UpdateTaskDto) {
+  //UPDATED A MATERIAL
+  async update(id: string, updateMaterialDto: UpdateMaterialDto) {
     try {
-      const userUpdated = await this.taskRepository.update(id, {
-        company: updateTaskDto.company,
-        description: updateTaskDto.description,
-        status: updateTaskDto.status,
+      const materialUpdated = await this.materialRepository.update(id, {
+        company: updateMaterialDto.company,
+        materials: updateMaterialDto.materials,
+        status: updateMaterialDto.status,
       });
-      return userUpdated;
+      return materialUpdated;
     } catch (error) {
       throw new HttpException(
         {

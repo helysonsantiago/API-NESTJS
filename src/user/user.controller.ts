@@ -37,7 +37,7 @@ export class UserController {
 
   @Roles(Role.ADMIN)
   @UseGuards(JwtGuard, RolesGuard)
-  @Patch(':id')
+  @Patch('/auth/:id')
   updateAdmin(@Param('id') id: string, @Body() updateAdminDto: UpdateAdminDto) {
     return this.userService.updateAdmin(id, updateAdminDto);
   }

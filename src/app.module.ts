@@ -7,6 +7,7 @@ import { ConfigModule } from '@nestjs/config';
 import { UserModule } from './user/user.module';
 import { AuthModule } from './auth/auth.module';
 import { TasksModule } from './tasks/tasks.module';
+import { MaterialModule } from './material/material.module';
 
 @Module({
   imports: [
@@ -14,6 +15,7 @@ import { TasksModule } from './tasks/tasks.module';
     ConfigModule.forRoot(),
     UserModule,
     AuthModule,
+    MaterialModule,
     TasksModule,
   ],
   controllers: [AppController],
